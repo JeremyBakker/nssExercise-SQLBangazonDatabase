@@ -7,6 +7,7 @@ DELETE FROM Payment Types;
 DELETE FROM Departments;
 DELETE FROM Products
 DELETE FROM Customers
+DELETE FROM EmployeeTraining
 
 DROP TABLE IF EXISTS Employees;
 DROP TABLE IF EXISTS Training;
@@ -17,10 +18,11 @@ DROP TABLE IF EXISTS PaymentTypes;
 DROP TABLE IF EXISTS Departments;
 DROP TABLE IF EXISTS Products;
 DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS EmployeeTraining
 
 CREATE TABLE Computer (
     ComputerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    PurchseDate TEXT NOT NULL,
+    PurchaseDate TEXT NOT NULL,
     DecomissionDate TEXT NOT NULL,
 	Description TEXT NOT NULL
 );
@@ -44,11 +46,20 @@ CREATE TABLE Training (
 	TrainingTitle TEXT NOT NULL
 );
 
+CREATE TABLE EmployeeTraining (
+    EmployeeTrainingId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    EmployeeId INT NOT NULL,
+    TrainingId INT NOT NULL,
+	FOREIGN KEY (EmployeeId) REFERENCES Employees(EmployeeId),
+	FOREIGN KEY (TrainingId) REFERENCES Training(TrainingId)
+);
+
 CREATE TABLE Employees (
     EmployeeId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     FirstName TEXT NOT NULL,
     LastName TEXT NOT NULL,
 	ComputerId INT NOT NULL,
+	Supervisor TEXT NOT NULL,
 	FOREIGN KEY(ComputerId) REFERENCES Computer(ComputerId)
 );
 
@@ -56,17 +67,16 @@ CREATE TABLE Employees (
 CREATE TABLE Orders (
     OrderId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	PaymentTypeId INT NOT NULL,
-    FOREIGN KEY(PaymentTypeId) REFERENCES PaymentTypes(PaymentTypeId)
+    ProductId INT NOT NULL,
+	FOREIGN KEY(PaymentTypeId) REFERENCES PaymentTypes(PaymentTypeId),
+	FOREIGN KEY(ProductId) REFERENCES Products(ProductId)
 );
 
 
 CREATE TABLE Departments (
     DepartmentId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	EmployeeId INT NOT NULL,
-    Supervisor TEXT NOT NULL,
 	Budget TEXT NOT NULL,
-	Name TEXT NOT NULL,
-	FOREIGN KEY(EmployeeId) REFERENCES Employees(EmployeeId)
+	Name TEXT NOT NULL
 );
 
 CREATE TABLE Products (
