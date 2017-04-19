@@ -32,7 +32,9 @@ CREATE TABLE Computer (
 CREATE TABLE PaymentTypes (
     PaymentTypeId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     PaymentType TEXT NOT NULL,
-    Account Number INT NOT NULL
+    Account Number INT NOT NULL,
+    CustomerId INT NOT NULL,
+    FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
 );
 
 CREATE TABLE ProductTypes (
@@ -105,8 +107,6 @@ CREATE TABLE Customers (
     CustomerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     FirstName TEXT NOT NULL,
     LastName TEXT NOT NULL,
-    PaymentTypeId INT NOT NULL,
     AccountCreationDate TEXT NOT NULL,
-    DateOfLastActivity TEXT NOT NULL,
-    FOREIGN KEY (PaymentTypeId) REFERENCES PaymentTypes(PaymentTypeId)
+    DateOfLastActivity TEXT NOT NULL
 );

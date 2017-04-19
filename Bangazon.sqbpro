@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jeremybakker/workspace/python/bangazon/bangazon.db"/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2320"/><expanded_item id="0" parent="-1"/><expanded_item id="1" parent="-1"/><expanded_item id="2" parent="-1"/><expanded_item id="3" parent="-1"/></tab_structure><tab_browse><current_table name=""/><default_encoding codec=""/><browsetable_info data="AAAAAA=="/></tab_browse><tab_sql><sql name="SQL 1">DELETE FROM Employees;
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="/Users/jeremybakker/workspace/python/bangazon/bangazon.db"/><window><current_tab id="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="2320"/><expanded_item id="0" parent="-1"/><expanded_item id="1" parent="-1"/><expanded_item id="2" parent="-1"/><expanded_item id="3" parent="-1"/></tab_structure><tab_browse><current_table name=""/><default_encoding codec=""/><browsetable_info data="AAAAAf////8AAAAAAAAAAAAAAAAAAAAAAAAAAAD/////"/></tab_browse><tab_sql><sql name="SQL 1">DELETE FROM Employees;
 DELETE FROM Training;
 DELETE FROM Orders;
 DELETE FROM Computer;
@@ -32,7 +32,9 @@ CREATE TABLE Computer (
 CREATE TABLE PaymentTypes (
     PaymentTypeId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	PaymentType TEXT NOT NULL,
-    Account Number INT NOT NULL
+    Account Number INT NOT NULL,
+	CustomerId INT NOT NULL,
+	FOREIGN KEY (CustomerId) REFERENCES Customers(CustomerId)
 );
 
 CREATE TABLE ProductTypes (
@@ -105,8 +107,6 @@ CREATE TABLE Customers (
     CustomerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	FirstName TEXT NOT NULL,
     LastName TEXT NOT NULL,
-	PaymentTypeId INT NOT NULL,
 	AccountCreationDate TEXT NOT NULL,
-	DateOfLastActivity TEXT NOT NULL,
-	FOREIGN KEY (PaymentTypeId) REFERENCES PaymentTypes(PaymentTypeId)
+	DateOfLastActivity TEXT NOT NULL
 );</sql><current_tab id="0"/></tab_sql></sqlb_project>
